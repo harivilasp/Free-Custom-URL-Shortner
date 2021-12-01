@@ -1,0 +1,21 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+
+{% if error %}
+    <div class="container shadow p-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p>The URL you are looking for doesn't exist</p>
+                <a href="/dashboard" class="bin btn-primary">Shorten a URL</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+</body>
+
+</html>
+
+{% endblock %}
