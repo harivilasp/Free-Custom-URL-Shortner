@@ -40,7 +40,7 @@ def generate(request):
         elif request.POST['original'] :
             #generate randomly
             usr=request.user
-            original=request.POST['orignal']
+            original=request.POST['original']
             generated = False
             while not generated:
                 short = randomgen()
@@ -73,3 +73,16 @@ def home(request, query=None):
             return redirect(url_to_redirect)
         except shorturl.DoesNotExist:
             return render(request, 'home.html', { 'error': 'error'})
+
+@login_required(login_url='/login/')
+def deleteurl(request):
+    if request.method == "POST":
+        short = request.POST['delete']
+        try:
+            check = shorturl.objects.filter(short_query=short)
+            check.delete()
+            return redirect(dashboard)
+        except shorturl.DoesNotExist:
+            return redirect(home)
+    else:
+        return redirect(home)
